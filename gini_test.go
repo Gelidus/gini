@@ -1,6 +1,7 @@
 package gini
 
 import (
+	"fmt"
 	"os"
 	"reflect"
 	"testing"
@@ -56,6 +57,7 @@ func TestRead(t *testing.T) {
 
 func TestReadFile(t *testing.T) {
 	conf := &Config{}
+	fmt.Println()
 
 	err := ReadFile(conf, "test.ini")
 	if err != nil {

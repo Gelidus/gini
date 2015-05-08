@@ -32,7 +32,7 @@ type Configuration struct {
     Age  int8
     Nuts int16 // cant have too many
   }
-  
+
   Human struct {
     Name        string
     Age         int8
@@ -49,7 +49,7 @@ gini.ReadFile(&config, "configuration.ini")
 // or, you can specify any io.Reader
 file, err := os.Open("configuration.ini")
 if err != nil {
-	t.Fatal(err)
+	fmt.Println(err.Error())
 }
 gini.Read(&config, file)
 ```
