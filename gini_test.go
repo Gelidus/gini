@@ -1,7 +1,6 @@
 package gini
 
 import (
-	"fmt"
 	"os"
 	"reflect"
 	"testing"
@@ -16,6 +15,7 @@ type Config struct {
 	Application struct {
 		GridSize int32
 		Formal   string
+		Run      bool
 	}
 }
 
@@ -43,9 +43,11 @@ func TestRead(t *testing.T) {
 		Application: struct {
 			GridSize int32
 			Formal   string
+			Run      bool
 		}{
 			GridSize: 100,
 			Formal:   "hello world",
+			Run:      true,
 		},
 	}
 
@@ -57,7 +59,6 @@ func TestRead(t *testing.T) {
 
 func TestReadFile(t *testing.T) {
 	conf := &Config{}
-	fmt.Println()
 
 	err := ReadFile(conf, "test.ini")
 	if err != nil {
@@ -75,9 +76,11 @@ func TestReadFile(t *testing.T) {
 		Application: struct {
 			GridSize int32
 			Formal   string
+			Run      bool
 		}{
 			GridSize: 100,
 			Formal:   "hello world",
+			Run:      true,
 		},
 	}
 

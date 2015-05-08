@@ -64,6 +64,13 @@ func reflectConfig(config interface{}, file *ini.File) error {
 
 			case reflect.String:
 				field.SetString(value)
+
+			case reflect.Bool:
+				b, err := strconv.ParseBool(value)
+				if err != nil {
+					return err
+				}
+				field.SetBool(b)
 			}
 		}
 	}
