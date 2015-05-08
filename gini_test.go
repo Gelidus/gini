@@ -19,20 +19,8 @@ type Config struct {
 	}
 }
 
-func TestRead(t *testing.T) {
-	conf := &Config{}
-
-	file, err := os.Open("test.ini")
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	err = Read(conf, file)
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	expected := &Config{
+var (
+	expected = &Config{
 		Section: struct {
 			Ahoy   string
 			Number int32
@@ -49,6 +37,20 @@ func TestRead(t *testing.T) {
 			Formal:   "hello world",
 			Run:      true,
 		},
+	}
+)
+
+func TestRead(t *testing.T) {
+	conf := &Config{}
+
+	file, err := os.Open("test.ini")
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	err = Read(conf, file)
+	if err != nil {
+		t.Fatal(err)
 	}
 
 	ok := reflect.DeepEqual(conf, expected)
@@ -63,25 +65,6 @@ func TestReadFile(t *testing.T) {
 	err := ReadFile(conf, "test.ini")
 	if err != nil {
 		t.Fatal(err)
-	}
-
-	expected := &Config{
-		Section: struct {
-			Ahoy   string
-			Number int32
-		}{
-			Ahoy:   "hello",
-			Number: 42,
-		},
-		Application: struct {
-			GridSize int32
-			Formal   string
-			Run      bool
-		}{
-			GridSize: 100,
-			Formal:   "hello world",
-			Run:      true,
-		},
 	}
 
 	ok := reflect.DeepEqual(conf, expected)
